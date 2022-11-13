@@ -54,7 +54,7 @@ import Score from './Score';
      create(){//생성
         const {x, y, width, height} = this.cameras.main;
         //배경
-        this.background = this.add.tileSprite(0, 0, this.physics.world.bounds.width, this.physics.world.bounds.height, 'background')
+        this.background = this.add.tileSprite(0, 0, width, height, 'background')
                                                                             .setOrigin(0)
                                                                             .setScrollFactor(0, 1);
 
@@ -92,7 +92,7 @@ import Score from './Score';
         this.score = new Score(this, x+10, y+10);
      }
      update(){//변경(갱신)
- 
+        
      }
 
      ending(text){
