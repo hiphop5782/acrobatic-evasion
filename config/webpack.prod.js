@@ -10,7 +10,7 @@ module.exports = merge(common, {
   devtool: false,
   output: {
     path: paths.build,
-    publicPath: '/acrobatic-evasion',
+    publicPath: '/acrobatic-evasion/',
     filename: 'js/[name].[contenthash].bundle.js',
   },
   module: {
