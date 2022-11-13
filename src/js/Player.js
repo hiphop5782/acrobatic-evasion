@@ -185,7 +185,8 @@ export default class Player extends Phaser.Physics.Arcade.Image {
             speed:200,
             score:10 * count//점수 = 대미지 * 콤보
         };
-        this.missile.createTTTLinearMissile(this, this.target, missileInfo);
+        //this.missile.createTTTLinearMissile(this, this.target, missileInfo);
+        this.missile.createTTTAccelerationMissile(this, this.target, missileInfo);
 
         //기체 변경
         this.setTexture('PlayerBaseAttack');
@@ -221,7 +222,8 @@ export default class Player extends Phaser.Physics.Arcade.Image {
             speed:400,
             score:20 * count
         };
-        this.missile.createTTTLinearMissile(this, this.target, missileInfo);
+        //this.missile.createTTTLinearMissile(this, this.target, missileInfo);
+        this.missile.createTTTAccelerationMissile(this, this.target, missileInfo);
 
         //기체 변경(0.5초)
         this.setTexture('PlayerAdvanceAttack');

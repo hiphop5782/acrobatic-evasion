@@ -92,7 +92,8 @@ import Score from './Score';
         this.score = new Score(this, x+10, y+10);
      }
      update(){//변경(갱신)
-        
+        //배경이 뒤로 밀리도록 처리
+        this.background.tilePositionY -= 1;
      }
 
      ending(text){

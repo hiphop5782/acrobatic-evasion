@@ -59,7 +59,8 @@ export default class Missile extends Phaser.Physics.Arcade.Sprite {
     }
 
     //(2) 타겟을 향해 발사하는 미사일
-    //- TTT : Target To Target
+    //- TTTLinear : Target To Target (등속도)
+    //- TTTAcceleration : Targe To Target (가속도)
     createTTTLinearMissile(attacker, target, missileInfo) {
         //시작지점 : attacker의 위치
         const attackerPos = attacker.getCenter();
@@ -81,6 +82,36 @@ export default class Missile extends Phaser.Physics.Arcade.Sprite {
             m.score = missileInfo.score;
             m.damage = missileInfo.damage;
             this.scene.physics.moveTo(m, tx, ty, missileInfo.speed);
+        });
+
+        //미사일 소멸 이벤트
+        Phaser.Actions.Call(missile, m=>{
+            m.body.onWorldBounds = true;
+        });
+
+        //충돌판정
+        this.scene.physics.add.overlap(missile, target, this.checkCollision);
+    }
+
+    createTTTAccelerationMissile(attacker, target, missileInfo) {
+        //시작지점 : attacker의 위치
+        const attackerPos = attacker.getCenter();
+        const sx = attackerPos.x;
+        const sy = attackerPos.y;
+
+        //미사일 생성
+        const missile = this.group.createMultiple({
+            frameQuantity:1,
+            key:missileInfo.type,
+            setXY:{x:sx, y:sy}
+        });
+        
+        const targetPos = target.getCenter();
+        missile.forEach(m=>{
+            m.setCircle(11);
+            m.score = missileInfo.score;
+            m.damage = missileInfo.damage;
+            this.scene.physics.accelerateToObject(m, target, missileInfo.speed);
         });
 
         //미사일 소멸 이벤트
