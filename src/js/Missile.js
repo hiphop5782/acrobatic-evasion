@@ -2,6 +2,7 @@
  * 미사일 클래스
  */
 import Phaser from 'phaser';
+import Trailer from './Trailer';
 
 export default class Missile extends Phaser.Physics.Arcade.Sprite {
 
@@ -82,6 +83,11 @@ export default class Missile extends Phaser.Physics.Arcade.Sprite {
             m.score = missileInfo.score;
             m.damage = missileInfo.damage;
             this.scene.physics.moveTo(m, tx, ty, missileInfo.speed);
+
+            //트레일러 설정이 있을 경우 트레일러 활성화 처리
+            if(missileInfo.trailer === true) {
+                const trailer = new Trailer(this.scene, m);
+            }
         });
 
         //미사일 소멸 이벤트
@@ -112,6 +118,11 @@ export default class Missile extends Phaser.Physics.Arcade.Sprite {
             m.score = missileInfo.score;
             m.damage = missileInfo.damage;
             this.scene.physics.accelerateToObject(m, target, missileInfo.speed);
+
+            //트레일러 설정이 있을 경우 트레일러 활성화 처리
+            if(missileInfo.trailer === true) {
+                const trailer = new Trailer(this.scene, m);
+            }
         });
 
         //미사일 소멸 이벤트
