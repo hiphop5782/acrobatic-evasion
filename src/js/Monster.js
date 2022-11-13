@@ -21,7 +21,7 @@ export default class Monster extends Phaser.Physics.Arcade.Image {
         this.setDepth(5);
 
         //체력 설정
-        const hp = 500;
+        const hp = 5000;
         this.life = new MonsterLifeBar(scene, this, hp);
 
         //미사일 설정
