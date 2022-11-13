@@ -32,10 +32,10 @@
     "eslint-plugin-prettier": "^4.0.0",
     "html-webpack-plugin": "^5.3.2",
     "mini-css-extract-plugin": "^2.4.2",
-    "sass": "^1.43.5",
     "postcss-loader": "^6.2.0",
     "postcss-preset-env": "^6.7.0",
     "prettier": "^2.4.1",
+    "sass": "^1.43.5",
     "sass-loader": "^12.2.0",
     "style-loader": "^3.3.0",
     "webpack": "^5.58.2",
@@ -46,5 +46,9 @@
   "repository": {
     "type": "git",
     "url": "git@github.com:taniarascia/webpack-boilerplate"
+  },
+  "dependencies": {
+    "phaser": "^3.55.2",
+    "webfontloader": "^1.6.28"
   }
 }
