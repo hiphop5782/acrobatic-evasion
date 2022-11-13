@@ -54,8 +54,9 @@ import Score from './Score';
      create(){//생성
         const {x, y, width, height} = this.cameras.main;
         //배경
-        this.background = this.add.tileSprite(x, y, width, height, 'background')
-                                                .setOrigin(0).setScrollFactor(0, 1);
+        this.background = this.add.tileSprite(0, 0, this.physics.world.bounds.width, this.physics.world.bounds.height, 'background')
+                                                                            .setOrigin(0)
+                                                                            .setScrollFactor(0, 1);
 
         //글꼴 크기 계산
         //- 제목 : 120px (1920px 기준) - 최소 50

@@ -62,7 +62,6 @@ export default class Monster extends Phaser.Physics.Arcade.Image {
     preUpdate(time, delta){//갱신
         //공격빈도를 화면에 따라 다르게 설정
         //1920px 기준으로 화면이 줄어들 수록 비율에 맞게 this.attack.frequency를 변경
-        console.log(this.attack.fixedFrequency);
         if(this.frameCount++ % this.attack.fixedFrequency == 0){
             this.missile.createLinearDownMissile(this.target, this.attack.speed);
         }
