@@ -45,10 +45,7 @@ export default class Monster extends Phaser.Physics.Arcade.Image {
                 const remain = 1 - percent;
                 const easyFreq = this.easy.frequency;
                 const gapFreq = Math.abs(this.hard.frequency - easyFreq);
-                console.log("before", this.frequency, gapFreq, remain);
                 this.frequency = parseInt(easyFreq - (gapFreq * remain));
-                console.log("after", this.frequency);
-
                 const easySpeed = this.easy.speed;
                 const gapSpeed = this.hard.speed - easySpeed;
                 this.speed = parseInt(easySpeed + gapSpeed * remain);
