@@ -185,6 +185,7 @@ export default class Player extends Phaser.Physics.Arcade.Image {
             speed:200,
             score:10 * count,//점수 = 대미지 * 콤보
             trailer:true,//트레일러 활성
+            size:11,
         };
         //this.missile.createTTTLinearMissile(this, this.target, missileInfo);
         this.missile.createTTTAccelerationMissile(this, this.target, missileInfo);
@@ -223,6 +224,7 @@ export default class Player extends Phaser.Physics.Arcade.Image {
             speed:400,
             score:20 * count,
             trailer:true,//트레일러 활성
+            size:11,
         };
         //this.missile.createTTTLinearMissile(this, this.target, missileInfo);
         this.missile.createTTTAccelerationMissile(this, this.target, missileInfo);

@@ -78,7 +78,7 @@ import Score from './Score';
         this.monster = new Monster(
             this, 
             center.x, 
-            height * 1 / 5
+            height * 1 / 5,
         );
 
         //상호 타겟 설정
@@ -90,6 +90,25 @@ import Score from './Score';
 
         //점수판
         this.score = new Score(this, x+10, y+10);
+
+        //난이도 표시
+        const monsterLevel = this.add.text(center.x, center.y, 'Level '+Monster.level)
+        .setFontFamily('Orbitron')
+        .setFontSize(this.titleFontSize)
+        .setOrigin(0.5)
+        .setDepth(9999);
+
+        this.tweens.add({
+            targets:monsterLevel,
+            alpha:0,//밝기(0~1)
+            duration:1000,//지속시간(ms)
+            repeat:0,
+            yoyo:false,//요요처리
+            ease:'EaseInOut',//타이밍함수
+            onComplete:(e,target)=>{
+                target[0].destroy();//완료된 텍스트 제거
+            }
+        });
      }
      update(){//변경(갱신)
         //배경이 뒤로 밀리도록 처리
@@ -144,11 +163,13 @@ import Score from './Score';
 
      //게임오버
      gameOver(){
+        Monster.level = 1;
         this.ending('Game over');
      }
 
      //게임클리어
      gameClear(){
+        Monster.level++;//몬스터 레벨 증가
         this.player.invincible = true;//플레이어 무적 처리
         this.ending('Game clear');
      }

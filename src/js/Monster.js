@@ -9,6 +9,7 @@ import Missile from './Missile';
 import MonsterLifeBar from './MonsterLifeBar';
 
 export default class Monster extends Phaser.Physics.Arcade.Image {
+    static level = 1;
     constructor(scene, x, y){//초기화
         super(scene, x, y);
 
@@ -20,6 +21,8 @@ export default class Monster extends Phaser.Physics.Arcade.Image {
         this.setPosition(x, y);
         this.setDepth(5);
 
+        console.log("level", Monster.level);
+
         //체력 설정
         const hp = 5000;
         this.life = new MonsterLifeBar(scene, this, hp);
@@ -29,12 +32,12 @@ export default class Monster extends Phaser.Physics.Arcade.Image {
 
         //공격 패턴 설정
         //- 가장 쉬운 난이도 : frequency(10), speed(100)
-        //- 가장 어려운 난이도 : frequency(1), speed(500)
+        //- 가장 어려운 난이도 : frequency(1), speed(400)
         this.attack = {
             frequency:10,
             speed:100,
             easy:{frequency:10, speed:100},
-            hard:{frequency:1, speed:500},
+            hard:{frequency:1, speed:400},
             ratio: 1920 / scene.cameras.main.width,
             get fixedFrequency(){
                 return Math.floor(this.frequency * this.ratio);
@@ -63,7 +66,53 @@ export default class Monster extends Phaser.Physics.Arcade.Image {
         //공격빈도를 화면에 따라 다르게 설정
         //1920px 기준으로 화면이 줄어들 수록 비율에 맞게 this.attack.frequency를 변경
         if(this.frameCount++ % this.attack.fixedFrequency == 0){
-            this.missile.createLinearDownMissile(this.target, this.attack.speed);
+            const missileInfo = {
+                type:'enemy-missile',
+                damage:1,
+                speed:this.attack.speed,
+                score:0,
+                size:8,
+            };
+
+            switch(Monster.level){
+                case 1:
+                    this.missile.createLinearMissile(this.target, 90, missileInfo);
+                    break;
+                case 2:
+                    this.missile.createAccMissile(this.target, 90, missileInfo);
+                    break;
+                case 3:
+                    this.missile.createLinearMissile(this.target, 45, missileInfo);
+                    this.missile.createLinearMissile(this.target, 90, missileInfo);
+                    this.missile.createLinearMissile(this.target, 135, missileInfo);
+                    break;
+                case 4:
+                    this.missile.createAccMissile(this.target, 45, missileInfo);
+                    this.missile.createAccMissile(this.target, 90, missileInfo);
+                    this.missile.createAccMissile(this.target, 135, missileInfo);
+                    break;
+                case 5:
+                    this.missile.createRandomSpeedLinearMissile(this.target, 90, missileInfo);
+                    break;
+                case 6:
+                    this.missile.createRandomSpeedAccMissile(this.target, 90, missileInfo);
+                    break;
+                case 7:
+                    this.missile.createRandomSpeedLinearMissile(
+                        this.target, Phaser.Math.Between(0, 359), missileInfo);
+                    break;
+                case 8:
+                    this.missile.createRandomSpeedLinearMissile(
+                        this.target, Phaser.Math.Between(0, 359), missileInfo);
+                    break;
+                case 9:
+                default:
+                    this.missile.createRandomSpeedLinearMissile(
+                        this.target, Phaser.Math.Between(0, 359), missileInfo);
+                    this.missile.createRandomSpeedLinearMissile(
+                        this.target, Phaser.Math.Between(0, 359), missileInfo);
+                    break;
+            }
         }
     }
 
